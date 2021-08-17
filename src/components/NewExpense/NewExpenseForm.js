@@ -5,7 +5,8 @@ const NewExpenseForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
-  
+  const [formShown, setFormShown] = useState(false);
+
   const submitHandler = (e) => {
     e.preventDefault();
     props.onSubmitHandler({
@@ -17,6 +18,19 @@ const NewExpenseForm = (props) => {
     setEnteredAmount("");
     setEnteredDate("");
   };
+  
+  const formCancelHandler = () => {
+    setEnteredTitle("");
+    setEnteredAmount("");
+    setEnteredDate("");
+    setFormShown(false);
+  };
+
+  if(!formShown) return(
+    <button onClick={ () => setFormShown(true) }>
+      Add New Expense
+    </button>
+  );
 
   return (
     <form onSubmit={ submitHandler }>
@@ -52,15 +66,14 @@ const NewExpenseForm = (props) => {
             max="2022-12-31"
           />
         </div>  
+        
         <div className="new-expense__actions">
+          <button onClick={ formCancelHandler }>Cancel</button>
           <button type="submit">Add Expense</button>
         </div> 
       </div> 
-      
     </form>  
-
   );
-    
 };
 
 export default NewExpenseForm;
