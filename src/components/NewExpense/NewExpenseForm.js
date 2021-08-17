@@ -11,12 +11,13 @@ const NewExpenseForm = (props) => {
     e.preventDefault();
     props.onSubmitHandler({
       title: enteredTitle,
-      amount: enteredAmount,
+      amount: +enteredAmount,
       date: new Date(enteredDate)
     });
     setEnteredTitle("");
     setEnteredAmount("");
     setEnteredDate("");
+    setFormShown(false);
   };
   
   const formCancelHandler = () => {
